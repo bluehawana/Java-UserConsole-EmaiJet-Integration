@@ -3,13 +3,13 @@ package se.dsve.input;
 import java.util.Scanner;
 
 public class InputHelper {
-	private Scanner scanner;
+	private static Scanner scanner;
 
 	public InputHelper() {
 		scanner = new Scanner(System.in);
 	}
 
-	public String readString() {
+	public static String readString() {
 //		System.out.print("Ange en sträng: ");
 		return scanner.nextLine();
 	}
