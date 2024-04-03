@@ -84,7 +84,7 @@ public class Service {
     }
 
 
-    public class EmailService {
+    public static class EmailService {
         public static void sendTemporaryPassword(String email, String password) throws MailjetException, MailjetSocketTimeoutException, InterruptedException {
             sendEmail(email, "User", "Temporary Password", "Your temporary password is: " + password, "<h3>Your temporary password is: " + password + "</h3>");
         }
