@@ -35,7 +35,7 @@ Jag kollade på min kod och såg att jag hade glömt att lägga till lösenordet
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Hur fungerar din temporära lösenordsmekanism?
-
+Min temporära lösenordsmekanism fungerar genom att användaren skapar en ny användare och sedan loggar in med användaren för att få ett temporärt lösenord. Detta lösenordet skickas till användarens e-postadress och användaren kan sedan logga in med detta lösenord. Lösenordet är giltigt i 10 minuter, och användaren kan logga in med det temporära lösenordet. Sedan kan användaren skapa en ny användare och logga in med användaren för att få ett nytt temporärt lösenord. Detta lösenordet skickas till användarens e-postadress och användaren kan sedan logga in med detta lösenord. Lösenordet är giltigt i 10 minuter, och användaren kan logga in med det temporära lösenordet.
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Reflektion och utvärdering
