@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class CodeValidityTimer {
-    private static LocalDateTime codeGenerationTime;
-    private static final long VALIDITY_PERIOD_SECONDS = 60;
+    public static LocalDateTime codeGenerationTime;
+    public static final long VALIDITY_PERIOD_SECONDS = 60;
 
     public CodeValidityTimer() {
         startTimer();
