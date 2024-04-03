@@ -16,18 +16,18 @@ public class CodeValidityTimer {
     }
 
     public void startTimer() {
-        // TODO: Skriv din kod här
         codeGenerationTime = LocalDateTime.now();
-
     }
 
     public static boolean isTimeValid() {
-
-        // TODO: Skriv din kod här
         long secondsElapsed = 0;
         if (codeGenerationTime != null) {
             secondsElapsed = ChronoUnit.SECONDS.between(codeGenerationTime, LocalDateTime.now());
         }
         return secondsElapsed <= VALIDITY_PERIOD_SECONDS;
+    }
+
+    public static LocalDateTime getCodeGenerationTime() {
+        return codeGenerationTime;
     }
 }
