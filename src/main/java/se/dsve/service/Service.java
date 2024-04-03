@@ -16,11 +16,11 @@ public class Service {
 
     public static void seedEmailAddresses() {
         // add email addresses to emailAddresses
-            users.add(new User("user1", "user1@example.com", "password1", null));
-            users.add(new User("user2", "user2@example.com", "password2", null));
-            users.add(new User("user3", "user3@example.com", "password3", null));
-            users.add(new User("user4", "user4@example.com", "password4", null));
-            users.add(new User("hz", "bluehawanan@gmail.com", "password", null));
+            users.add(new User("user1", "user1@example.com", "password1", "tempPassword1"));
+            users.add(new User("user2", "user2@example.com", "password2", "tempPassword2"));
+            users.add(new User("user3", "user3@example.com", "password3", "tempPassword3"));
+            users.add(new User("user4", "user4@example.com",  "password4", "tempPassword4"));
+            users.add(new User("hz", "bluehawanan@gmail.com", "password", "tempPassword5"));
         }
 
     public static User registerNewUser() throws MailjetSocketTimeoutException, InterruptedException, MailjetException {
@@ -42,7 +42,7 @@ public class Service {
         System.out.println("Enter the temporary password sent to your email: ");
         String enteredPassword = scanner.nextLine();
         if (enteredPassword.equals(password)) {
-            User newUser = new User(name, email, password, null);
+            User newUser = new User(name, email, password, password);
             users.add(newUser);
             return newUser;
         } else {
