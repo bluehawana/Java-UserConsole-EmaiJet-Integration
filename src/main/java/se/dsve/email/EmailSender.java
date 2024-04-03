@@ -26,36 +26,33 @@ public class EmailSender {
         // 5. Skicka email
         // 6. Skriv ut status och data
         Dotenv dotenv = Dotenv.load();
-        String apiKey = dotenv.get("MAILJET_API_KEY");
-        String apiSecret = dotenv.get("MAILJET_API_SECRET");
-        String fromEmail = dotenv.get("FROM_EMAIL");
-        String fromName = dotenv.get("FROM_NAME");
-
-        MailjetClient client = new MailjetClient(apiKey, apiSecret, new ClientOptions("v3.1"));
-        MailjetRequest request = new MailjetRequest(Emailv31.resource)
+        MailjetClient client = new MailjetClient(
+                dotenv.get("MJ_APIKEY_PUBLIC"),
+                dotenv.get("MJ_APIKEY_PRIVATE"),
+                new ClientOptions("v3.1")
+        );
+        MailjetRequest request;
+        MailjetResponse response;
+        request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
                                 .put(Emailv31.Message.FROM, new JSONObject()
-                                        .put("Email", fromEmail)
-                                        .put("Name", fromName))
+                                        .put("Email", dotenv.get("FROM_EMAIL"))
+                                        .put("Name", dotenv.get("FROM_NAME")))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
                                                 .put("Email", toEmail)
                                                 .put("Name", toName)))
                                 .put(Emailv31.Message.SUBJECT, subject)
                                 .put(Emailv31.Message.TEXTPART, textPart)
-                                .put(Emailv31.Message.HTMLPART, content)));
-
-        MailjetResponse response = client.post(request);
-
+                                .put(Emailv31.Message.HTMLPART, content)
+                                .put(Emailv31.Message.CUSTOMID, "AppGettingStartedTest")));
+        response = client.post(request);
         System.out.println(response.getStatus());
         System.out.println(response.getData());
-
     }
 
     public static void verifyEmail(String toEmail, String toName, String verifyPassword) throws MailjetException, MailjetSocketTimeoutException, InterruptedException {
-        // TODO: Skriv din kod här
-        // Skicka email med verifieringskod via sendEmail metoden
         String subject = "Verify your email";
         String textPart = "Your verification code is: " + verifyPassword;
         String content = "<h3>Your verification code is: " + verifyPassword + "</h3>";
@@ -63,12 +60,10 @@ public class EmailSender {
     }
 
     public static void verifySignIn(String toEmail, String toName, String generatedPassword) throws MailjetException, MailjetSocketTimeoutException, InterruptedException {
-        // TODO: Skriv din kod här
-        // Skicka email med inloggningskod via sendEmail metoden
-        // Om toName finns i en lista med användarnamn, använd TO_EMAIL från .env filen
         List<String> usernames = Arrays.asList("user1", "user2", "user3", "user4", "user5");
-        if(usernames.contains(toName)) {
-            toEmail = Dotenv.load().get("TO_EMAIL");
+        if (usernames.contains(toName)) {
+            Dotenv dotenv = Dotenv.load();
+            toEmail = dotenv.get("USER_EMAIL");
             String subject = "Login Code";
             String textPart = "Your login code is: ";
             String content = "<h1>Your login code is: " + generatedPassword + "</h1>";

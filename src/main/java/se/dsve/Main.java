@@ -2,6 +2,7 @@ package se.dsve;
 
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import se.dsve.email.EmailSender;
 import se.dsve.input.InputHelper;
 import se.dsve.user.User;
 
@@ -12,8 +13,19 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, MailjetSocketTimeoutException, MailjetException {
         seedEmailAddresses();
+        sendVerificationEmail("example@example.com", "Example", "123456");
         menu();
     }
+
+    public static void sendVerificationEmail(String toEmail, String toName, String verificationCode) {
+        try {
+            EmailSender.verifyEmail(toEmail, toName, verificationCode);
+            System.out.println("Verification email sent successfully.");
+        } catch (Exception e) {
+            System.out.println("Error sending verification email: " + e.getMessage());
+        }
+    }
+
 
     private static void menu() throws MailjetSocketTimeoutException, InterruptedException, MailjetException {
         while (true) {
