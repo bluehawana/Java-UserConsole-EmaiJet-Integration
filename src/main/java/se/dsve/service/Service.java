@@ -81,9 +81,12 @@ public class Service {
     }
 
     static User getUser(String email) {
-        // TODO: Skriv din kod här
-        User user = getUser(email);
-        return user;
+        for (User user : users) {
+            if (user.email().equals(email)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     static boolean validateEmail(String email) {
