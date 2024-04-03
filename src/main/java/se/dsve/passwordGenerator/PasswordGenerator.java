@@ -10,7 +10,12 @@ public class PasswordGenerator {
 
     public static String generatePassword() {
         // TODO: Skriv din kod här
-        return "";
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < PASSWORD_LENGTH; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            password.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+        return password.toString();
     }
 }
 
