@@ -88,7 +88,12 @@ public class Service {
 
     static boolean validateEmail(String email) {
         // TODO: Skriv din kod här
-        return email.matches("^(.+)@(.+)$");
+        for (User user : users) {
+            if (user.email().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void sendTemporaryPassword(String email, String password) throws MailjetSocketTimeoutException, InterruptedException, MailjetException {
